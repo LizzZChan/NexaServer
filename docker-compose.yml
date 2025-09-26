@@ -1,0 +1,25 @@
+version: "3"
+networks:
+  net:
+    external:
+      name: bas-ws-net
+services:
+  nuix-server:
+    image: eclipse-temurin:17-jre
+    restart: always
+    ports:
+      - "26665:26665"
+    working_dir: /home/nuixserver
+    volumes:
+      - ./target:/home/nuixserver
+    command: java -jar nuixserver-1.0.0-SNAPSHOT-fat.jar
+    networks:
+      - net
+  nuix-kimi-free-api:
+    image: vinlic/kimi-free-api:latest
+    restart: always
+    ports:
+      - "26660:8000"
+    networks:
+      - net
+

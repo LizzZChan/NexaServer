@@ -1,0 +1,73 @@
+openapi: 3.0.0
+info:
+  title: Article Summary Service
+  description: asa
+  #Get key points and detailed chunks from WeChat articles.
+  version: '1.0.0'
+  x-service-id: 'f97e2a85-dc9a-4785-8353-c8f007a88f50'
+  x-default-path: /summary
+  x-package-name: 'com.tencent.mm'
+  x-page: link
+servers:
+  - url: http://118.186.244.217:32039
+paths:
+  /summary:
+    post:
+      summary: Get article summary
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nuix.uid:
+                  type: string
+                  description: User ID
+                nuix.ui.data:
+                  type: string
+                  description: URL of the WeChat article
+                nuix.query.instruction:
+                  type: string
+                  description: user's interest
+      responses:
+        "200":
+          description: OK
+  /detail:
+    post:
+      summary: get detail info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nuix.uid:
+                  type: string
+                  description: User ID
+                selection:
+                  type: string
+                  description: user selected options, like option1,option3
+      responses:
+        "200":
+          description: OK
+  /search:
+    post:
+      summary: get related chunks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nuix.uid:
+                  type: string
+                  description: User ID
+                nuix.query.instruction:
+                  type: string
+                  description: user's query (natural language)
+      responses:
+        "200":
+          description: OK
